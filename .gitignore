@@ -19,4 +19,4 @@ node_modules
 README.md
 
 # settings
-setting.json
+.vscode/settings.json
