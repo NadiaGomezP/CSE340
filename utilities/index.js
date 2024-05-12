@@ -28,35 +28,71 @@ Util.getNav = async function (req, res, next) {
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
+
 Util.buildClassificationGrid = async function(data){
-    let grid
-    if(data.length > 0){
-      grid = '<ul id="inv-display">'
-      data.forEach(vehicle => { 
-        grid += '<li>'
-        grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
-        + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-        + 'details"><img src="' + vehicle.inv_thumbnail 
-        +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-        +' on CSE Motors" /></a>'
-        grid += '<div class="namePrice">'
-        grid += '<hr />'
-        grid += '<h2>'
-        grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-        + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-        + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-        grid += '</h2>'
-        grid += '<span>$' 
-        + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-        grid += '</div>'
-        grid += '</li>'
-      })
-      grid += '</ul>'
-    } else { 
-      grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-    }
-    return grid
+  let innerHTML = "";
+
+  if (data.length > 0) {
+    innerHTML += "<ul id='inv-display'>";
+    data.forEach(vehicle => {
+      innerHTML += `
+        <li>
+          <a class="imgVehicle" href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+            <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />
+          </a>
+            <hr/>
+          <h2 class = "nameVehicle">
+            <a href="../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+              ${vehicle.inv_make} ${vehicle.inv_model}
+            </a>
+          </h2>
+          <span class="priceVehicle">$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>
+        </li>`;
+    });
+    innerHTML += "</ul>";
+  } else { 
+    innerHTML += "<p class='notice'>Sorry, no matching vehicles could be found.</p>";
   }
+
+  const view = innerHTML;
+  return view;
+};
+
+//Build a custom function in the utilities > index.js file that will take the specific vehicle's information and wrap it HTML DETAIL
+Util.buildDetailsGrid = async function(data){
+  let pageTitle = `<h2 class="h2TitleDetail"> ${data[0].inv_year} ${data[0].inv_make} ${data[0].inv_model}</h2>`;
+  let innerHTML = `
+  <article class="detailsArticle">
+
+    <div class="detailImg">
+      <img src="${data[0].inv_image}" alt="Car image" />
+    </div>
+
+    <div class="detailsName">
+      <h2> ${data[0].inv_make} ${data[0].inv_model} Details </h2>
+    </div>
+    
+    <div class="details_Characteristics">
+      <span>
+          <b>Price:</b>
+          <strong>$${new Intl.NumberFormat("en-US").format(data[0].inv_price)}</strong>
+      </span>
+      <span><time datetime="${data[0].inv_year}"><b>Year:</b> 
+        ${data[0].inv_year}
+      </time></span>
+      <span><b>Description:</b> ${data[0].inv_description}</span>
+      <span><b>Color:</b> ${data[0].inv_color}</span>
+      <span><b>Brand:</b> ${data[0].inv_make}</span>
+      <span><b>Model:</b> ${data[0].inv_model}</span>
+      <span><b>Miles travelled:</b> ${new Intl.NumberFormat("en-Us").format(
+        data[0].inv_miles
+      )}</span>
+    </div>
+  </article>
+  `;
+  const view = pageTitle + innerHTML;
+  return view;
+};
 
 /* ****************************************
  * Middleware For Handling Errors
