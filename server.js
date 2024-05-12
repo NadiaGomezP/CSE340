@@ -30,15 +30,21 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute));
 // File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
-  if (!req.params.errorStatus) {
-    next({ status: 404, message: "Sorry, we appear to have lost that page." });
-    return;
+app.get("/errors/error/:errorStatus", async (req, res, next) => {
+  const errorStatus = req.params.errorStatus;
+  
+  if (errorStatus === '500') {
+    // Simulate a 500 Internal Server Error
+    const error = new Error('Internal Server Error');
+    error.status = 500;
+    next(error);
+  } else {
+    // For other error statuses, return a generic error message
+    next({
+      status: errorStatus,
+      message: "Unknown error occurred. Please try again.",
+    });
   }
-  next({
-    status: req.params.errorStatus,
-    message: "Unknown error occurred. Please try again.",
-  });
 });
 
 /* ***********************

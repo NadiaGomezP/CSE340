@@ -7,14 +7,14 @@ baseController.buildHome = async function(req, res){
 }
 
 baseController.buildError = async function (req, res, next) {
-  const errorStatus = req.params.errorStatus;
-  const nav = await utilities.getNav();
-  const errorData = {
-    status: 500,
-    message: "Server Error",
-    nav: nav
-  };
-  res.status(500).send(errorData);
+  try {
+    // Simulate an error by dividing by zero
+    const result = 10 / 0;
+    res.send(result); // This won't execute due to the error
+  } catch (error) {
+    // Pass the error to the next middleware
+    next(error);
+  }
 };
 
 module.exports = baseController
