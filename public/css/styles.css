@@ -290,3 +290,77 @@ a, a:visited, a:hover, a:active {
   
  
 }
+
+/* Notice */
+.notice{
+  font-weight: bold;
+  color: red;
+  text-align: left;
+}
+
+/* Combined Login and Registration page styles */
+.container-formall {
+  text-align: center; /* Center the content horizontally */
+  margin-bottom: 20px; /* Add some space between title and form */
+}
+
+.form-title {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.container-form {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+.form-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.form-input[type="text"],
+.form-input[type="email"],
+.form-input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-label{
+  font-family: "Open Sans", sans-serif;
+}
+
+.form-submit {
+  background-color: #7017ac;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-submit:hover {
+  background-color: #a83af1;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.form-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+
+
