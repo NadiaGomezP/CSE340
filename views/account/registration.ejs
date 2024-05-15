@@ -18,11 +18,11 @@
     <div class="form-box" id="registrationBox">
         <form class="registration-form" id="registrationForm" action="/account/registration" method="post">
             <label for="firstName" class="form-label">First Name:</label>
-            <input type="text" id="firstName" name="account_firstname" class="form-input" required>
+            <input type="text" id="firstName" name="account_firstname" class="form-input" required value="<%= locals.account_firstname %>">
             <label for="lastName" class="form-label">Last Name:</label>
-            <input type="text" id="lastName" name="account_lastname" class="form-input" required>
+            <input type="text" id="lastName" name="account_lastname" class="form-input" required value="<%= locals.account_lastname %>">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="account_email" class="form-input" required>
+            <input type="email" id="email" name="account_email" class="form-input" required value="<%= locals.account_email %>">
             <label for="password" class="form-label">Password:</label>
             <input type="password" id="password" name="account_password" class="form-input" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" title="Password must be at least 12 characters long and contain at least one uppercase letter, one number, and one special character" required>
             <input type="submit" value="Register" class="form-submit">

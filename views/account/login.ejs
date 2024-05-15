@@ -9,12 +9,11 @@
 
 <div class="container-form">
     <div class="form-box" id="loginBox">
-        <form class="login-form" id="loginForm" action="/login" method="post">
+        <form class="login-form" id="loginForm" action="/account/login" method="post">
             <label for="email" class="form-label">Email:</label>
-            <input type="email" id="email" name="account_email" class="form-input" required>
+            <input type="email" id="email" name="account_email" class="form-input" required value="<%= locals.account_email %>">
             <label for="password" class="form-label">Password:</label>
             <input type="password" id="password" name="account_password" class="form-input" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" title="Password must be at least 12 characters long and contain at least one uppercase letter, one number, and one special character" required>
-        
             <input type="submit" value="Login" class="form-submit">
         </form>
         <div class="form-link" id="registerLink">
