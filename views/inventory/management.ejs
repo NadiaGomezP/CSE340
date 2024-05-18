@@ -1,0 +1,18 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+    <%- messages() %>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<div>
+    <!-- Link to trigger the process to deliver the "add new classification" view -->
+    <a href="/inv/add-classification">Add New Classification</a>
+</div>
+
+<div>
+    <!-- Link to trigger the process to deliver the "add new inventory" view -->
+    <a href="/inv/add-inventory">Add New Inventory</a>
+</div>

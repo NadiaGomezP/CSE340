@@ -1,0 +1,27 @@
+<div class="container-form">
+<div class="form-box" id="newinventoryBox">
+<form id="addInventoryForm" action="/add-inventory" method="post" onsubmit="return validateForm()">
+    <label for="make">Make:</label><br>
+    <input type="text" id="inv_make" name="inv_make" required>   
+    <label for="model">Model:</label><br>
+    <input type="text" id="inv_model" name="inv_model" required>    
+    <label for="year">Year:</label><br>
+    <input type="text" id="year" name="inv_year" required pattern="\d{4}" title="Please enter a valid 4-digit year">    
+    <label for="description">Description:</label>
+    <textarea id="description" name="inv_description" required></textarea><br>   
+    <label for="image">Image Path:</label><br>
+    <input type="text" id="image" name="inv_image" required>
+    <label for="thumbnail">Thumbnail Path:</label><br>
+    <input type="text" id="thumbnail" name="inv_thumbnail" required>  
+    <label for="price">Price:</label><br>
+    <input type="text" id="price" name="inv_price" required pattern="\d+(\.\d{2})?" title="Please enter a valid price">
+    <label for="miles">Miles:</label>
+    <input type="text" id="miles" name="inv_miles" required pattern="\d+" title="Please enter a valid integer">  
+    <label for="color">Color:</label><br>
+    <input type="text" id="color" name="inv_color" required>   
+    <label for="classification">Classification:</label>
+    <%= classificationList %>   
+    <input type="submit" value="Submit">
+</form>
+</div>
+</div>
