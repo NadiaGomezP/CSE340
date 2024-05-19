@@ -114,7 +114,7 @@ Util.buildClassificationList = async function (classification_id = null) {
     classificationList += ">" + row.classification_name + "</option>"
   })
   classificationList += "</select>"
-  return cl
+  return classificationList
 };
 
 /* ****************************************

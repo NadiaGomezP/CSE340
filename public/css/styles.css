@@ -294,8 +294,8 @@ a, a:visited, a:hover, a:active {
 /* Notice */
 .notice{
   font-weight: bold;
-  color: red;
-  text-align: left;
+  color: blue;
+  text-align:left;
 }
 
 /* Combined Login and Registration page styles */
@@ -361,6 +361,4 @@ a, a:visited, a:hover, a:active {
   color: #007bff;
   text-decoration: none;
 }
-
-
 

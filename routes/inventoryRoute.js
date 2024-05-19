@@ -27,6 +27,15 @@ router.get("/add-inventory", invController.buildNewCarForm);
 //Add classification POST
 router.post('/add-classification/',
 validate.namecharacteristics(),
-utilities.handleErrors(invController.addClassification))
+validate.checkClassData, 
+utilities.handleErrors(invController.addClassification));
+
+//Add vehicle POST
+router.post('/add-inventory',
+validate.addInventoryValidation(),
+validate.checkInvData,
+utilities.handleErrors(invController.addVehicle));
+
+
 
 module.exports = router;
