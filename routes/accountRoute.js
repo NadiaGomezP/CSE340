@@ -13,6 +13,11 @@ router.get("/login/",accountController.buildLogin);
 //Route for the path that will be sent when the "Registration" link is clicked
 router.get("/registration/",accountController.buildRegistration);
 
+//Route for the path that will be sent when the "Login" link is clicked
+router.get("",
+utilities.checkLogin,
+accountController.buildAccManag);
+
 //Registration POST
 router.post('/registration/',
 validate.registationRules(),
@@ -20,12 +25,8 @@ validate.checkRegData,
 utilities.handleErrors(accountController.registerAccount))
 
 // Process the login attempt
-router.post(
-    "/login",
-    (req, res) => {
-      res.status(200).send('login process')
-    }
-)
+router.post("/login/",
+utilities.handleErrors(accountController.loginAccount))
 
 //Error route
 router.get("errors/error/:errorStatus", baseController.buildError);
