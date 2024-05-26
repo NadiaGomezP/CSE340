@@ -146,7 +146,6 @@ a, a:visited, a:hover, a:active {
   #wrapper{
     background-color: white;
     border: 0.5rem solid rgb(99, 13, 156);
-    border-radius: 3%;
   }
 
   #hero{
@@ -350,6 +349,10 @@ a, a:visited, a:hover, a:active {
 
 .form-submit:hover {
   background-color: #a83af1;
+}
+
+.form-submit:disabled {
+  background-color: grey;
 }
 
 .form-link {

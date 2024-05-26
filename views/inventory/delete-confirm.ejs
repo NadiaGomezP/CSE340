@@ -1,0 +1,35 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<div class="container-form">
+<div class="form-box" id="deleteBox">
+    <form class="editInventoryForm" id="deleteForm" action="/inv/delete/<%= locals.inv_id %>" method="post">
+        <label for="make" class="form-label">Make:</label>
+        <input type="text" id="make" name="inv_make" class="form-input" required value="<%= locals.inv_make %>" readonly>   
+        <label for="model" class="form-label">Model:</label>
+        <input type="text" id="model" name="inv_model" class="form-input" required value="<%= locals.inv_model %>" readonly>    
+        <label for="year" class="form-label">Year:</label>
+        <input type="text" id="year" name="inv_year" class="form-input" required pattern="\d{4}" title="Please enter a valid 4-digit year" value="<%= locals.inv_year %>" readonly>    
+        <label for="price" class="form-label">Price:</label>
+        <input type="text" id="price" name="inv_price" class="form-input" required pattern="\d+(\.\d{2})?" title="Please enter a valid price" value="<%= locals.inv_price %>" readonly>
+        <input type="submit" value="Delete Vehicle" class="form-submit">
+        <input type="hidden" name="inv_id"<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>
+    </form>
+<p>Confirm Deletion - The delete is permanent.</p>
+</div>
+</div>
+
+

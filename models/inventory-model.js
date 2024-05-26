@@ -91,5 +91,51 @@ async function addNewVehicle(inv_make, inv_model,inv_year,inv_description, inv_i
       return error.message;
   }
 }
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByVehicle,addNewClassification, checkExistingClassificationName, addNewVehicle};
+
+  /* *****************************
+*   update New Vehicle
+* *************************** */
+async function updateInventory(inv_id, inv_make, inv_model,inv_year,inv_description, inv_image,
+  inv_thumbnail,inv_price,inv_miles,inv_color, classification_id) {
+  try {
+      const sql =
+      "UPDATE public.inventory SET inv_make = $1, inv_model = $2, inv_year = $3, inv_description = $4, inv_image = $5, inv_thumbnail = $6, inv_price = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
+      const data = await pool.query(sql, [
+          inv_make,
+          inv_model,
+          inv_year,
+          inv_description,
+          inv_image,
+          inv_thumbnail,
+          inv_price,
+          inv_miles,
+          inv_color,
+          classification_id,
+          inv_id,
+      ]);
+      return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+/* ***************************
+ *  Delete Inventory Item
+ * ************************** */
+async function deleteVehicle(inv_id) {
+  try {
+      const sql = 'DELETE FROM public.inventory WHERE inv_id = $1';
+      const { rowCount } = await pool.query(sql, [inv_id]);
+      if (rowCount === 1) {
+          return true;
+      } else {
+  throw new Error("No inventory item with the specified ID found.");
+      }
+  } catch (error) {
+  console.error("Error deleting inventory item:", error);
+      throw error;
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getDetailsByVehicle,addNewClassification, checkExistingClassificationName, addNewVehicle, updateInventory, deleteVehicle};
 
