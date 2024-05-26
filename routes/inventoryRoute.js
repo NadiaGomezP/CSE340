@@ -17,28 +17,30 @@ router.get("/detail/:carId", invController.buildByCarId);
 router.get("errors/error/:errorStatus", baseController.buildError);
 
 //Management route
-router.get("/", invController.buildManagement);
+router.get("/", utilities.checkLogin, invController.buildManagement);
 
 //Add classification route
-router.get("/add-classification", invController.buildClassificationForm);
+router.get("/add-classification", utilities.checkAccountType, invController.buildClassificationForm);
 
 //Add new car route
-router.get("/add-inventory", invController.buildNewCarForm);
+router.get("/add-inventory", utilities.checkAccountType, invController.buildNewCarForm);
 
 //Add new route for get inventory
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
 
 //Add path to modify 
-router.get("/edit/:inventory_id", utilities.handleErrors(invController.editController))
+router.get("/edit/:inventory_id", utilities.checkAccountType, utilities.handleErrors(invController.editController))
 
 // Add path to delete
-router.get("/delete/:inventory_id",utilities.handleErrors(invController.buildConfirmDelete))
+router.get("/delete/:inventory_id", utilities.checkAccountType, utilities.handleErrors(invController.buildConfirmDelete))
 
 router.post("/delete/:inventory_id",
+utilities.checkAccountType,
 utilities.handleErrors(invController.deleteInventory))
 
 //Add route to post update
 router.post("/edit-inventory",
+utilities.checkAccountType,
 validate.addInventoryValidation(),
 validate.checkUpdateData,
 utilities.handleErrors(invController.updateInventory))
@@ -46,12 +48,14 @@ utilities.handleErrors(invController.updateInventory))
 
 //Add classification POST
 router.post('/add-classification/',
+utilities.checkAccountType,
 validate.namecharacteristics(),
 validate.checkClassData, 
 utilities.handleErrors(invController.addClassification));
 
 //Add vehicle POST
 router.post('/add-inventory',
+utilities.checkAccountType,
 validate.addInventoryValidation(),
 validate.checkInvData,
 utilities.handleErrors(invController.addVehicle));

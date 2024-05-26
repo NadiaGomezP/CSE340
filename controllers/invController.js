@@ -69,14 +69,10 @@ invCont.buildClassificationForm = async function (req, res, next) {
 invCont.buildNewCarForm = async function (req, res, next) {
   let nav = await utilities.getNav();
   const classificationList = await utilities.buildClassificationList();
-  const defaultImagePath = '/images/vehicles/no-image.png';
-  const defaultThumbnailPath = '/images/vehicles/no-image-tn.png';
   res.render("inventory/add-inventory", {
     title: "Add Inventory",
     nav,
     errors: null,
-    defaultImagePath,
-    defaultThumbnailPath,
     classificationList,
   })
 }

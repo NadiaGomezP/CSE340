@@ -26,9 +26,9 @@
     <label for="description" class="form-label">Description:</label>
     <textarea id="description" name="inv_description" class="form-input" required><%= locals.inv_description %></textarea><br>
     <label for="image" class="form-label">Image Path:</label>
-    <input type="text" id="image" name="inv_image" class="form-input" required value="<%= defaultImagePath %>">
+    <input type="text" id="image" name="inv_image" class="form-input" required value="<%= locals.inv_image %>">
     <label for="thumbnail" class="form-label">Thumbnail Path:</label>
-    <input type="text" id="thumbnail" name="inv_thumbnail" class="form-input" required value="<%= defaultThumbnailPath %>">  
+    <input type="text" id="thumbnail" name="inv_thumbnail" class="form-input" required value="<%= locals.inv_thumbnail %>">  
     <label for="price" class="form-label">Price:</label>
     <input type="text" id="price" name="inv_price" class="form-input" required pattern="\d+(\.\d{2})?" title="Please enter a valid price" value="<%= locals.inv_price %>">
     <label for="miles" class="form-label">Miles:</label>

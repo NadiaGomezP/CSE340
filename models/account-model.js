@@ -39,4 +39,55 @@ async function getAccountByEmail(account_email) {
   }
 }
 
-  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail}
+
+  /* *****************************
+* Return account data using account_id
+* ***************************** */
+async function getAccountById(account_id) {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM public.account WHERE account_id = $1',
+      [account_id])
+    return result.rows[0]
+  } catch (error) {
+    return new Error("No matching email found")
+  }
+}
+
+
+  /* *****************************
+* Update account information
+* ***************************** */
+async function updateAccQuery(accountData) {
+  try {
+    const sql =
+      "UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *";
+    const result = await pool.query(sql, [
+      accountData.account_firstname,
+      accountData.account_lastname,
+      accountData.account_email,
+      accountData.account_id,
+    ]);
+    return result.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+  /* *****************************
+* Update password
+* ***************************** */
+async function updatePasswordQuery(accountData) {
+  try {
+    const sql = "UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *"
+    const data = await pool.query(sql, [accountData.account_password, accountData.account_id,]);
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+
+
+
+  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, getAccountById,updateAccQuery, updatePasswordQuery}

@@ -125,4 +125,84 @@ async function loginAccount(req, res) {
   }
  }
 
-module.exports = { buildLogin, buildRegistration, registerAccount, loginAccount, buildAccManag}
+
+ /* ****************************************
+*  Deliver account update view
+* *************************************** */
+async function buildAccUpdate(req, res, next) {
+  const { account_id } = req.params;
+  let nav = await utilities.getNav()
+  const userData = await accModel.getAccountById(account_id);
+  const { account_firstname, account_lastname, account_email } = userData;
+  res.render("account/update", {
+    title: "Account Update",
+    nav,
+    errors: null,
+    account_firstname,
+    account_lastname,
+    account_email,
+  })
+}
+
+ /* ****************************************
+*  Process account update 
+* *************************************** */
+async function updateAccInfo(req, res, next) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email, account_id } = req.body;
+  const accountData = {account_firstname, account_lastname,account_email,account_id,};
+  try {
+    const updateResult = await accModel.updateAccQuery(accountData);
+    if (updateResult) {
+      req.flash("notice", "Information successfully updated");
+      res.status(201).render("account/accountManagement", {
+        title: "Account Management",
+        nav,
+        errors: null,
+      })
+    } else {
+      req.flash("notice", "Sorry, the update failed.");
+      res.status(501).render("account/accountManagement", {
+        title: "Account Management",
+        nav,
+        errors: null,
+      })
+    }
+  } catch (error) {
+    new Error(error);
+  }
+};
+
+ /* ****************************************
+*  Process password update 
+* *************************************** */
+async function updatePassword(req, res, next) {
+let nav = await utilities.getNav();
+const {account_id, account_password } = req.body;
+const hashedPassword = await bcrypt.hash(account_password, 10);
+const accountData = {account_id,account_password: hashedPassword,};
+const updateResult = await accModel.updatePasswordQuery(accountData);
+    if (updateResult) {
+          req.flash("notice", "Password successfully update");
+          res.status(201).render("account/accountManagement", {
+            title: "Account Management",
+            nav,
+            errors: null,
+          })
+        } else {
+          req.flash("notice", "The password update failed");
+          res.status(501).render("account/accountManagement", {
+            title: "Account Management",
+            nav,
+            errors: null,
+          })
+        }
+      }
+
+//Log Out account      
+async function logoutAcc(req, res, next) {
+res.clearCookie("jwt");
+res.redirect("/");
+};
+
+module.exports = { buildLogin, buildRegistration, registerAccount, loginAccount, buildAccManag, buildAccUpdate, updateAccInfo, updatePassword, logoutAcc}

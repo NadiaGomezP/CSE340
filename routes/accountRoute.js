@@ -31,4 +31,28 @@ utilities.handleErrors(accountController.loginAccount))
 //Error route
 router.get("errors/error/:errorStatus", baseController.buildError);
 
+// Process update page
+router.get("/update/:account_id",
+utilities.checkLogin,
+utilities.handleErrors(accountController.buildAccUpdate)); 
+
+//Route to update account information post
+router.post("/update",
+validate.updateInfoRules(),
+validate.checkUpdInformation,
+utilities.handleErrors(accountController.updateAccInfo));
+
+
+//Route to password change post
+router.post("/update/password",
+utilities.checkLogin,
+validate.updatePassRules(),
+validate.checkPassInformation,
+utilities.handleErrors(accountController.updatePassword));
+
+//Route to log out post
+router.post("/logout/", 
+utilities.handleErrors(accountController.logoutAcc));
+
+
 module.exports = router;

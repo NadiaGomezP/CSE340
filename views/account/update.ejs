@@ -1,0 +1,45 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+    </div>
+<% } else {
+    res.redirect('/');
+} %>
+
+<div class="container-form">
+    <div class="form-box" id="updatebox">
+<form action="/account/update" method="post">
+    <h2>Account Update</h2>
+    <label class="form-label" for="firstName">First Name:</label>
+    <input class="form-input" type="text" id="firstName" name="account_firstname" required value="<%= locals.account_firstname %>">
+    <label class="form-label" for="lastName">Last Name:</label>
+    <input class="form-input" type="text" id="lastName" name="account_lastname" required value="<%= locals.account_lastname %>">
+    <label class="form-label" for="email">Email:</label>
+    <input class="form-input" type="email" id="email" name="account_email" required value="<%= locals.account_email %>">
+    <input type="submit" value="Update Account" class="form-submit">
+    <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+</form>
+</div>
+</div>
+
+<!-- Change Password form -->
+<div class="container-form">
+    <div class="form-box" id="passwordbox">
+<form action="/account/update/password" method="post">
+    <h2>Change Password</h2>
+    <label class="form-label" for="password">New Password:</label>
+    <input type="password" id="password" name="account_password" class="form-input" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" title="Password must be at least 12 characters long and contain at least one uppercase letter, one number, and one special character" required>
+    <input type="submit" value="Change Password" class="form-submit">
+    <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+</form>
+<p>New password will change current password. This action is permanent.</p>
+</div>
+</div>

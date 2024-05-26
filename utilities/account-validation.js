@@ -120,4 +120,87 @@ validate.checkLogData = async (req, res, next) => {
 };
   
 
+//Validation for new password
+validate.updatePassRules = () => {
+  return [
+    body("account_password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+          minLength: 12,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements."),
+  ];
+};
+
+validate.updateInfoRules = () => {
+  //validate the user information excluding the password
+  return [
+    //first name validation
+    body("account_firstname")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide first name"),
+
+    //last name validation
+    body("account_lastname")
+      .trim()
+      .escape()
+      .isLength({ min: 1 })
+      .notEmpty()
+      .withMessage("Please provide a last name"),
+
+    //email validation
+    body("account_email")
+      .trim()
+      .escape()
+      .normalizeEmail()
+      .isEmail()
+      .withMessage("Please provide a valid email address"),
+  ];
+};
+
+validate.checkUpdInformation = async (req, res, next) => {
+  const {account_firstname, account_lastname, account_email, account_id } = req.body;
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/update", {
+      title: "Update",
+      nav,
+      errors,
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+    });
+    return;
+  }
+  next();
+};
+
+
+validate.checkPassInformation = async (req, res, next) => {
+  const {account_password } = req.body;
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/update", {
+      title: "Update",
+      nav,
+      errors,
+      account_password
+    });
+    return;
+  }
+  next();
+};
+
+
   module.exports = validate

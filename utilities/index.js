@@ -149,10 +149,27 @@ Util.checkJWTToken = (req, res, next) => {
      res.locals.loggedin = 1
      next()
     })
-  } else {
-   next()
+  }  else {
+    res.locals.loggedin = 0;
+    next();
   }
  }
+
+
+/* ****************************************
+* Middleware to check account type
+**************************************** */
+ Util.checkAccountType = (req, res, next) => {
+  const userAllowed =
+    res.locals.accountData?.account_type === "Admin" ||
+    res.locals.accountData?.account_type === "Employee";
+  if (userAllowed) {
+    next();
+  } else {
+    req.flash("notice", "You are not authorized to view this page.");
+    res.redirect("/account");
+  }
+};
 
 /* ****************************************
  * Middleware For Handling Errors
