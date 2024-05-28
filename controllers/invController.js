@@ -83,7 +83,7 @@ invCont.buildNewCarForm = async function (req, res, next) {
 *  Process Add clasification
 * *************************************** */
 invCont.addClassification = async function (req, res, next) {
-  const { classification_name } = req.body
+  const { classification_name, classification_id } = req.body
   const addClassificationResult = await invModel.addNewClassification(
     classification_name
   )
@@ -125,6 +125,7 @@ invCont.addVehicle = async function (req, res, next) {
   )
 
   let nav = await utilities.getNav()
+  
   const classificationList = await utilities.buildClassificationList(classification_id)
 
   if (addVehicleResult) {
