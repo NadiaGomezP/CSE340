@@ -1,0 +1,11 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+    <%- messages() %>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+
+<%- messageData %>

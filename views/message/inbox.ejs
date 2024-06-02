@@ -1,0 +1,31 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+    <%- messages() %>
+    </div>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+
+<div class="links">
+    <a href="/inbox/create">Create New Message</a>
+</div>
+<div class="links">
+    <a href="/inbox/archive">View Archived Messages</a>
+</div>
+
+
+<table id="personalMessagesTable" class="message-table">
+    <thead>
+        <tr>
+            <th class="message-header">Received</th>
+            <th class="message-header">Subject</th>
+            <th class="message-header">From</th>
+            <th class="message-header">Read</th>
+        </tr>
+    </thead>
+    <tbody id="personalMessagesBody">
+        <%- personalMessages %>
+    </tbody>
+</table>

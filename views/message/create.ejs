@@ -1,0 +1,30 @@
+<% if (title) { %>
+    <div class="container-formall">
+        <h1 class="form-title"><%= title %></h1>
+        <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+    </div>
+<% } else {
+    res.redirect('/');
+} %>
+
+<div class="container-form">
+    <div class="form-box" id="createBox">
+        <form class="create-form" id="createForm" action="/inbox/create" method="post">
+            <label for="to">To:</label>
+            <%- toList %><br><br>
+            <label for="subject" class="form-label">Subject:</label>
+            <input type="text" id="subject" name="message_subject" class="form-input" required value="<%= locals.message_subject %>">
+            <label for="message" class="form-label">Message:</label><br>
+            <textarea id="message" name="message_body" class="form-input" required><%= locals.message_body %></textarea><br>
+            <input type="submit" value="Send" class="form-submit">
+            <input type="hidden" id="messageFrom" name="message_from" value="<%= locals.accountData.account_id %>">
+        </form>
+    </div>
+</div>

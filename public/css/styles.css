@@ -370,3 +370,97 @@ a, a:visited, a:hover, a:active {
   text-align: center;
   font-size: 20px;
 }
+
+.linksaccount{
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  font-size: 15px;
+}
+
+.titlesaccount{
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  font-size: 23px;
+}
+
+#paragrapsaccount{
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  font-size: 18px;
+
+}
+
+/*css for inbox*/
+.message-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.message-header {
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.message-row:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.message-row:hover {
+  background-color: #ddd;
+}
+
+.message-data {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.message-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.message {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.message p {
+  margin: 5px 0;
+}
+
+.message hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.message-action {
+  text-decoration: none;
+  color: blue;
+  margin-right: 10px;
+}
+
+
+.message-action {
+  text-decoration: none;
+  color: blue;
+  margin-right: 10px;
+}
+
+.message-action-button {
+  margin-top: 5px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+}
+
+.message-action-button:hover {
+  background-color: #0056b3;
+}

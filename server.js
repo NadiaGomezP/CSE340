@@ -15,6 +15,7 @@ const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
+const messageRoute = require("./routes/messageRoute")
 const utilities = require("./utilities/")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
@@ -65,6 +66,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", utilities.handleErrors(inventoryRoute));
 // Account routes
 app.use("/account", utilities.handleErrors(accountRoute));
+// Message routes
+app.use("/inbox", utilities.handleErrors(messageRoute));
 // File Not Found Route - must be last route in list
 app.get("/errors/error/:errorStatus", async (req, res, next) => {
   const errorStatus = req.params.errorStatus;

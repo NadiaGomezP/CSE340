@@ -64,7 +64,7 @@ invCont.buildClassificationForm = async function (req, res, next) {
 }
 
 /* ****************************************
-*  Deliver add classification view
+*  Deliver add vehicle view
 * *************************************** */
 invCont.buildNewCarForm = async function (req, res, next) {
   let nav = await utilities.getNav();

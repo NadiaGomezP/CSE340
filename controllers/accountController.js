@@ -36,11 +36,14 @@ async function buildRegistration(req, res, next) {
 *  Deliver account management view
 * *************************************** */
 async function buildAccManag(req, res, next) {
+  const accountId = res.locals.accountData.account_id;
+  const unreadMessages = await utilities.getUnreadMessagesCount(accountId)
   let nav = await utilities.getNav()
   res.render("account/accountManagement", {
     title: "Account Management",
     nav,
     errors: null,
+    unreadMessages,
   })
 }
 
@@ -97,7 +100,7 @@ async function registerAccount(req, res) {
  * ************************************ */
 async function loginAccount(req, res) {
   let nav = await utilities.getNav()
-  const { account_email, account_password } = req.body
+  const {account_email, account_password } = req.body
   const accountData = await accModel.getAccountByEmail(account_email)
   if (!accountData) {
    req.flash("notice", "Please check your credentials and try again.")
@@ -204,5 +207,8 @@ async function logoutAcc(req, res, next) {
 res.clearCookie("jwt");
 res.redirect("/");
 };
+
+
+
 
 module.exports = { buildLogin, buildRegistration, registerAccount, loginAccount, buildAccManag, buildAccUpdate, updateAccInfo, updatePassword, logoutAcc}
