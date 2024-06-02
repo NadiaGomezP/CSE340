@@ -17,7 +17,7 @@
 <div class="container-form">
     <div class="form-box" id="createBox">
         <form class="create-form" id="createForm" action="/inbox/create" method="post">
-            <label for="to">To:</label>
+            <label for="toList">To:</label>
             <%- toList %><br><br>
             <label for="subject" class="form-label">Subject:</label>
             <input type="text" id="subject" name="message_subject" class="form-input" required value="<%= locals.message_subject %>">

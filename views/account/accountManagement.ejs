@@ -13,7 +13,7 @@ locals.accountData.account_type == 'Admin' ) { %>
 <% } %>
 
 
-<p id="paragrapsaccount">Youre logged in.</p>
+<p class="paragrapsaccount">Youre logged in.</p>
 
 <div class="linksaccount">
   <a href="/account/update/<%- locals.accountData.account_id %>">Update Account Information</a>
@@ -30,7 +30,7 @@ locals.accountData.account_type == 'Admin' ) { %>
 <% if (locals.accountData.account_type == "Client" || locals.accountData.account_type == 'Employee' ||
 locals.accountData.account_type == 'Admin' ) { %>
 <h2 class="titlesaccount" >Message Center</h2>
-<p id="paragrapsaccount">You have <%- unreadMessages %> message(s) unread.</p>
+<p class="paragrapsaccount">You have <%- unreadMessages %> message(s) unread.</p>
 <div class="linksaccount">
     <a href="/inbox">Go to Inbox</a>
 </div>
